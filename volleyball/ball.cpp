@@ -5,13 +5,14 @@
 
 Ball::Ball(float x, float y, float dx, float dy, float r)
     :
+    gravity(0.02),
     x(x),
     y(y),
     dx(dx),
     dy(dy),
     r(r) {}
 
-void Ball::render(int cnt)
+void Ball::drawBall(int cnt)
 {
     float x, y;
     float da = M_PI * 2.0 / cnt;
@@ -24,4 +25,28 @@ void Ball::render(int cnt)
             glVertex2f(x, y);
         }
     glEnd();
+}
+void  Ball::reflect(float *da, float *a, bool cond, float wall)
+{
+    if (!cond) return;
+    *da *= -0.85;
+    *a = wall;
+}
+void Ball::render()
+{
+    glPushMatrix();
+        glTranslatef(x, y, 0);
+        glScalef(r, r, 1);
+        drawBall(20);
+    glPopMatrix();
+}
+void Ball::move()
+{
+    x += dx;
+    y += dy;
+    reflect(&dy, &y, (y < r - 1), r - 1);
+    reflect(&dy, &y, (y > 1 - r), 1 - r);
+    dy -= gravity;
+    reflect(&dx, &x, (x < r - float(1200)/700), r - float(1200)/700);
+    reflect(&dx, &x, (x > float(1200)/700 - r), float(1200)/700 - r);
 }

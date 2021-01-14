@@ -31,7 +31,6 @@ int init()
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glScalef(WIN_HEIGHT/float(WIN_WIDTH), 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
     return 0;
 }
 
