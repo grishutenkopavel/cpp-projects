@@ -4,9 +4,11 @@
 #include "render.hpp"
 
 class Game{
-    // private:
-    //     Render render;
-    EventLoop gLoop;
+    private:
+    //  Render render;
+        EventLoop gLoop;
+        void drawCube(float x, float y, float dx, float dy);
+        void renderBackground();
     public:
         void start(SDL_Window *window);
 };
