@@ -8,10 +8,8 @@
 #include "include/player.hpp"
 #include "include/ball.hpp"
 
-#define WIN_HEIGHT 700
-#define WIN_WIDTH 1200
-
 SDL_Window *window = NULL;
+
 int init()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
