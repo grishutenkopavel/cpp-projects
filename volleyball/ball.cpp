@@ -1,6 +1,7 @@
 #include <math.h>
 #include <GL/gl.h>
 #include <math.h>
+#include "include/constants.hpp"
 #include "include/ball.hpp"
 
 Ball::Ball(float x, float y, float dx, float dy, float r)
@@ -49,4 +50,17 @@ void Ball::move()
     dy -= gravity;
     reflect(&dx, &x, (x < r - float(1200)/700), r - float(1200)/700);
     reflect(&dx, &x, (x > float(1200)/700 - r), float(1200)/700 - r);
+
+    if (y < GRID_HEIGHT)
+    {
+        if (x > 0)
+        {
+            reflect(&dx, &x, (x < r), r);
+        }
+        else
+        {
+            reflect(&dx, &x, (x > -r), -r);
+        }
+        
+    }
 }

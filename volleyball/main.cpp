@@ -4,7 +4,7 @@
 
 #include "include/game.hpp"
 #include "include/eventloop.hpp"
-#include "include/render.hpp"
+#include "include/constants.hpp"
 #include "include/player.hpp"
 #include "include/ball.hpp"
 

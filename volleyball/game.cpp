@@ -1,6 +1,6 @@
 #include "include/game.hpp"
 #include "include/eventloop.hpp"
-#include "include/render.hpp"
+#include "include/constants.hpp"
 #include "include/ball.hpp"
 
 #include <GL/gl.h>
@@ -23,6 +23,15 @@ void Game::renderBackground()
     glColor3f(0.66, 0.85, 1);
     drawCube(-(float)1200/700, 0.2, (float)1200/700*2, 1);
 }
+void Game::renderGrid()
+{
+    glColor3f(0, 0, 0);
+    glLineWidth(8);
+    glBegin(GL_LINES);
+        glVertex2f(0, GRID_HEIGHT);
+        glVertex2f(0, -1);
+    glEnd();
+}
 void Game::start(SDL_Window *window)
 {
     bool running = true;
@@ -34,6 +43,7 @@ void Game::start(SDL_Window *window)
         glClear(GL_COLOR_BUFFER_BIT);
         ball.move();
         renderBackground();
+        renderGrid();
         glColor3f(0, 0.5, 0);
         SDL_Delay(50);
         ball.render();
