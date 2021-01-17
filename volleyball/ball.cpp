@@ -1,6 +1,6 @@
 #include <math.h>
 #include <GL/gl.h>
-#include <math.h>
+#include <SDL2/SDL.h>
 #include "include/constants.hpp"
 #include "include/ball.hpp"
 

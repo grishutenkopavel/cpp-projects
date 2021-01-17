@@ -34,11 +34,13 @@ void Render::renderGrid()
 void Render::show(SDL_Window *window, Ball *ball, Player *player1, Player *player2)
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    
     ball->move();
+    player1->playerMove(-KOEF, 0);
+    player2->playerMove(0, KOEF);
     renderBackground();
     renderGrid();
     SDL_Delay(50);
-
     glColor3f(0, 0.5, 0);
     ball->render();
 
