@@ -37,8 +37,14 @@ void Render::show(SDL_Window *window)
     ball.move();
     renderBackground();
     renderGrid();
-    glColor3f(0, 0.5, 0);
     SDL_Delay(50);
+
+    glColor3f(0, 0.5, 0);
     ball.render();
+
+    glColor3f(0.8, 0, 0);
+    player1.render();
+    glColor3f(0.23, 0.29, 0.79);
+    player2.render();
     SDL_GL_SwapWindow(window);
 }

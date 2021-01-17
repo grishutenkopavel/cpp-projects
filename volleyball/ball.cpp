@@ -33,6 +33,20 @@ void  Ball::reflect(float *da, float *a, bool cond, float wall)
     *da *= -0.85;
     *a = wall;
 }
+bool Ball::isCross(float x1, float y1, float r, float x2, float y2)
+{
+    return pow(x1-x2, 2) + pow(y1-y2, 2) < r * r;
+}
+void Ball::mirror(float x, float y)
+{
+    float objVec = atan2(dx, dy);
+    float crossVec = atan2(this->x-x, this->y-y);
+    float resVec = M_PI - objVec + crossVec * 2;
+    float speed = sqrt(pow(dx, 2) + pow(dy, 2));
+
+    dx = sin(resVec) * speed;
+    dy = cos(resVec) * speed;
+}
 void Ball::render()
 {
     glPushMatrix();
@@ -62,5 +76,10 @@ void Ball::move()
             reflect(&dx, &x, (x > -r), -r);
         }
         
+    }
+    else 
+    {
+        if(isCross(x, y, r, 0, GRID_HEIGHT))
+            mirror(0, GRID_HEIGHT);
     }
 }
