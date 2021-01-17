@@ -5,14 +5,14 @@
 
 #include <GL/gl.h>
 #include <iostream>
-
+#include "include/game.hpp"
 void Game::start(SDL_Window *window)
 {
     bool running = true;
     while (running)
     {
-        running = gLoop.loop();
-        renderer.show(window);
+        running = gLoop.loop(&player1, &player2);
+        renderer.show(window, &ball, &player1, &player2);
     }
 
 }

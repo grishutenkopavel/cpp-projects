@@ -6,14 +6,11 @@
 class Render
 {
     private:
-        Ball ball = Ball(0, 0.5, 0.15, -0.01, 0.2);
-        Player player1 = Player(-1, 0, 0, 0, 0.2);
-        Player player2 = Player(1, 0, 0, 0, 0.2);
         void drawCube(float x, float y, float dx, float dy);
         void renderBackground();
         void renderGrid();
     public:
-        void show(SDL_Window *window);
+        void show(SDL_Window *window, Ball *ball, Player *player1, Player *player2);
 };
 
 #endif

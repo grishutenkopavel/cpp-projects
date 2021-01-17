@@ -31,20 +31,20 @@ void Render::renderGrid()
     glEnd();
 }
 
-void Render::show(SDL_Window *window)
+void Render::show(SDL_Window *window, Ball *ball, Player *player1, Player *player2)
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    ball.move();
+    ball->move();
     renderBackground();
     renderGrid();
     SDL_Delay(50);
 
     glColor3f(0, 0.5, 0);
-    ball.render();
+    ball->render();
 
     glColor3f(0.8, 0, 0);
-    player1.render();
+    player1->render();
     glColor3f(0.23, 0.29, 0.79);
-    player2.render();
+    player2->render();
     SDL_GL_SwapWindow(window);
 }
