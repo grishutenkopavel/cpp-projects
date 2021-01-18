@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include "include/constants.hpp"
 #include "include/ball.hpp"
+#include "include/player.hpp"
 
 Ball::Ball(float x, float y, float dx, float dy, float r)
     :
@@ -37,16 +38,25 @@ bool Ball::isCross(float x1, float y1, float r, float x2, float y2)
 {
     return pow(x1-x2, 2) + pow(y1-y2, 2) < r * r;
 }
-void Ball::mirror(float x, float y)
+void Ball::mirror(float x, float y, float speed)
 {
     float objVec = atan2(dx, dy);
     float crossVec = atan2(this->x-x, this->y-y);
-    float resVec = M_PI - objVec + crossVec * 2;
-    float speed = sqrt(pow(dx, 2) + pow(dy, 2));
+    float resVec = speed == 0 ? M_PI - objVec + crossVec * 2 : crossVec;
+    speed = speed == 0 ? sqrt(pow(dx, 2) + pow(dy, 2)) : speed;
 
     dx = sin(resVec) * speed;
     dy = cos(resVec) * speed;
 }
+void Ball::checkCollision(float *playerX, float *playerY, float *playerR)
+{
+    if(isCross(*playerX, *playerY, *playerR + r, x, y))
+    {
+        mirror(*playerX, *playerY, 0.12);
+        this->dy += 0.01;
+    }
+}
+
 void Ball::render()
 {
     glPushMatrix();
@@ -80,6 +90,6 @@ void Ball::move()
     else 
     {
         if(isCross(x, y, r, 0, GRID_HEIGHT))
-            mirror(0, GRID_HEIGHT);
+            mirror(0, GRID_HEIGHT, 0);
     }
 }

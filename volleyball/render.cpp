@@ -38,9 +38,11 @@ void Render::show(SDL_Window *window, Ball *ball, Player *player1, Player *playe
     ball->move();
     player1->playerMove(-KOEF, 0);
     player2->playerMove(0, KOEF);
+    ball->checkCollision(&player1->x, &player1->y, &player1->r);
+    ball->checkCollision(&player2->x, &player2->y, &player2->r);
     renderBackground();
     renderGrid();
-    SDL_Delay(50);
+    SDL_Delay(35);
     glColor3f(0, 0.5, 0);
     ball->render();
 
