@@ -1,9 +1,10 @@
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
 
-SDL_Window *window = nullptr;
+#include "include/arrays.h"
 
-void draw()
+SDL_Window *window = nullptr;
+void drawCube()
 {
     glColor3f(1,1,0);
     glBegin( GL_QUADS );
@@ -11,7 +12,15 @@ void draw()
             glVertex2f( 0.5f, -0.5f );
             glVertex2f( 0.5f, 0.5f );
             glVertex2f( -0.5f, 0.5f );
-    glEnd();;
+    glEnd();
+}
+void draw()
+{
+    glVertexPointer(2, GL_FLOAT, 0, &vertex);
+    glEnableClientState(GL_VERTEX_ARRAY);
+        glColor3f(1,1,0);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableClientState(GL_VERTEX_ARRAY);   
 }
 
 void init(int width, int height)
