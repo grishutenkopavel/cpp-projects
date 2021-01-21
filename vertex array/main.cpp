@@ -14,6 +14,24 @@ void drawCube()
             glVertex2f( -0.5f, 0.5f );
     glEnd();
 }
+void drawZ()
+{
+    glVertexPointer(2, GL_FLOAT, 0, &Z);
+    glEnableClientState(GL_VERTEX_ARRAY);
+        glLineWidth(4);
+        glColor3f(1,1,0);
+        glDrawArrays(GL_LINE_STRIP, 0, 4);
+    glDisableClientState(GL_VERTEX_ARRAY); 
+}
+void drawIndexZ()
+{
+    // glVertexPointer(2, GL_FLOAT, 0, &Z);
+    // glEnableClientState(GL_VERTEX_ARRAY);
+    //     glLineWidth(4);
+    //     glColor3f(1,1,0);
+    //     glDrawArrays(GL_LINE_STRIP, 0, 4);
+    // glDisableClientState(GL_VERTEX_ARRAY); 
+}
 void draw()
 {
     glVertexPointer(2, GL_FLOAT, 0, &vertex);
@@ -60,7 +78,7 @@ void eventLoop()
                 }
             }
         }
-        draw();
+        drawZ();
          SDL_GL_SwapWindow(window);
     }
     
