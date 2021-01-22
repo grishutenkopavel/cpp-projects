@@ -14,23 +14,58 @@ void drawCube()
             glVertex2f( -0.5f, 0.5f );
     glEnd();
 }
+void drawChristmasTree()
+{
+    glVertexPointer(2, GL_FLOAT, 0, &christmasTreeVertex);
+    glEnableClientState(GL_VERTEX_ARRAY);
+
+    glColorPointer(3, GL_FLOAT, 0, &christmasTreeColors);
+    glEnableClientState(GL_COLOR_ARRAY);
+
+        glDrawArrays(GL_TRIANGLES, 0, 15);
+
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
+    
+}
+void drawIndexChristmasTree()
+{
+    glVertexPointer(2, GL_FLOAT, 0, &christmasTreeVertex);
+    glEnableClientState(GL_VERTEX_ARRAY);
+
+    glColorPointer(3, GL_FLOAT, 0, &christmasTreeColors);
+    glEnableClientState(GL_COLOR_ARRAY);
+
+       glDrawElements(GL_TRIANGLES, 15, GL_UNSIGNED_INT, &christmasTree);
+
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
+}
 void drawZ()
 {
+    glLineWidth(4);
     glVertexPointer(2, GL_FLOAT, 0, &Z);
     glEnableClientState(GL_VERTEX_ARRAY);
-        glLineWidth(4);
-        glColor3f(1,1,0);
+
+    glColorPointer(3, GL_FLOAT, 0, &colors);
+    glEnableClientState(GL_COLOR_ARRAY);
         glDrawArrays(GL_LINE_STRIP, 0, 4);
+
+    glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY); 
 }
 void drawIndexZ()
 {
-    // glVertexPointer(2, GL_FLOAT, 0, &Z);
-    // glEnableClientState(GL_VERTEX_ARRAY);
-    //     glLineWidth(4);
-    //     glColor3f(1,1,0);
-    //     glDrawArrays(GL_LINE_STRIP, 0, 4);
-    // glDisableClientState(GL_VERTEX_ARRAY); 
+    glLineWidth(4);
+    glColor3f(1,1,0);
+
+    glVertexPointer(2, GL_FLOAT, 0, &Z);
+    glEnableClientState(GL_VERTEX_ARRAY);
+        
+        glDrawElements(GL_LINE_STRIP, 4, GL_UNSIGNED_INT, &index);
+    
+    glDisableClientState(GL_VERTEX_ARRAY);
+
 }
 void draw()
 {
@@ -78,7 +113,7 @@ void eventLoop()
                 }
             }
         }
-        drawZ();
+        drawIndexChristmasTree();
          SDL_GL_SwapWindow(window);
     }
     
