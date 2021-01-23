@@ -3,6 +3,18 @@
 
 SDL_Window *window = nullptr;
 
+float redTriangle[]= {
+    -1, 0, 1,
+    1, 1, 0,
+    1, -1, 0
+};
+
+float greenTriangle[]= {
+    1, 0, 1,
+    -1, 1, 0,
+    -1, -1, 0
+};
+
 bool init(int witdh, int height);
 void eventLoop();
 void close();
@@ -37,13 +49,61 @@ bool init(int witdh, int height)
 
 void eventLoop()
 {
-    SDL_GL_SwapWindow(window);
-    SDL_Delay(3000);
+    SDL_Event ev;
+    bool running = true;
+
+    glFrustum(-2,2, -1,1, 0,3);
+    while(running)
+    {
+        while(SDL_PollEvent(&ev) != 0)
+        {
+            if(ev.type == SDL_QUIT)
+                running = false;
+            if(ev.type == SDL_KEYDOWN)
+            {
+                switch (ev.key.keysym.sym)
+                {
+                case SDLK_ESCAPE:
+                    running = false;
+                    break;
+                
+                default:
+                    break;
+                }   
+            }
+        }
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        drawRedTriangle();
+        drawGreenTriangle();
+        glTranslatef(0,0,-0.01);
+        glRotatef(1, 2, 1, 0);
+        SDL_Delay(16);
+        SDL_GL_SwapWindow(window);
+    }
+    
 }
+
 void close()
 {
     SDL_DestroyWindow(window);
     window = nullptr;
+}
+
+void drawRedTriangle()
+{
+    glColor3f(1,0,0);
+    glVertexPointer(3, GL_FLOAT, 0, &redTriangle);
+    glEnableClientState(GL_VERTEX_ARRAY);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableClientState(GL_VERTEX_ARRAY);
+}
+void drawGreenTriangle()
+{
+    glColor3f(0,1,0);
+    glVertexPointer(3, GL_FLOAT, 0, &greenTriangle);
+    glEnableClientState(GL_VERTEX_ARRAY);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
 int main(int argc, char *argv[])
 {
