@@ -41,7 +41,7 @@ void close();
 
 void drawCube();
 
-bool init(int witdh, int height)
+bool init(int width, int height)
 {
     SDL_GLContext context;
     bool success = true;
@@ -53,7 +53,7 @@ bool init(int witdh, int height)
     window = SDL_CreateWindow("Cube",
                             SDL_WINDOWPOS_CENTERED,
                             SDL_WINDOWPOS_CENTERED,
-                            witdh, height, 
+                            width, height, 
                             SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
     if(window == nullptr)
     {
