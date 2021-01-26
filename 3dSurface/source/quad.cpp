@@ -10,14 +10,15 @@ Quad::Quad(float x, float y, float width, float height)
 
 void Quad::draw()
 {
-    glColor3f(0,1,0);
-    glBegin(GL_QUADS);
-        glVertex3f(x_, y_, 0);
-        glVertex3f(x_, y_ - h_, 0);
-        glVertex3f(x_ - h_, y_ - h_, 0);
-        glVertex3f(x_ - h_, y_, 0);
-    glEnd();
     glPushMatrix();
         glRotatef(-20, 1, 0, 0);
+        glTranslatef(0, 0, -3);
+        glColor3f(0,0.5,0);
+        glBegin(GL_QUADS);
+            glVertex3f(x_, y_, 0);
+            glVertex3f(x_, y_ - h_, 0);
+            glVertex3f(x_ - h_, y_ - h_, 0);
+            glVertex3f(x_ - h_, y_, 0);
+        glEnd();
     glPopMatrix();
 }

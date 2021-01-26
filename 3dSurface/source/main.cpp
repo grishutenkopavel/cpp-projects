@@ -3,13 +3,11 @@
 
 int main(int argc, char *argv[])
 {
-    Window *window = new Window(800, 600);
+    Window *window = new Window(500, 500);
 
-    Quad q1(0.5, 0.5, 1, 1);
-    Quad q2(1, 1, 0.5, 0.5);
+    Quad floor(1, 1, 2, 2);
 
-    window->drawObject(q1);
-    window->drawObject(q2);
+    window->drawObject(floor);
 
     window->show();
     delete window;

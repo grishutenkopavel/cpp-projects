@@ -17,7 +17,7 @@ Window::Window(int width, int height)
     {
         status = !success;
     }
-    window = SDL_CreateWindow("Cube",
+    window = SDL_CreateWindow("MiniGame",
                             SDL_WINDOWPOS_CENTERED,
                             SDL_WINDOWPOS_CENTERED,
                             width_, height_, 
@@ -29,7 +29,7 @@ Window::Window(int width, int height)
 
     context = SDL_GL_CreateContext(window);
     glClearColor(0, 0, 0, 0);
-    glFrustum(-1,1, -1,1, -4, 20);
+    glFrustum(-1,1, -1,1, 2, 8);
     // glEnable(GL_DEPTH_TEST);
     status = success;
 }
