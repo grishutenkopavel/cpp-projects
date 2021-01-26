@@ -8,7 +8,7 @@ class EventLoop
 private:
     SDL_Event ev;
 public:
-    bool KeyEventHandler(SDL_Event &event);
+    bool handleKeyEvent(SDL_Event &event);
     void start(bool &runState);
 };
 

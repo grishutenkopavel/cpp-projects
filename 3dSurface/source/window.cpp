@@ -2,6 +2,8 @@
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
 
+#include "../include/quad.hpp"
+
 SDL_Window *window = nullptr;
 
 Window::Window(int width, int height)
@@ -27,19 +29,27 @@ Window::Window(int width, int height)
 
     context = SDL_GL_CreateContext(window);
     glClearColor(0, 0, 0, 0);
+    glFrustum(-1,1, -1,1, -4, 20);
     // glEnable(GL_DEPTH_TEST);
     status = success;
 }
 
 void Window::show()
 {
+
     bool running = true;
     while(running)
     {
         el.start(running);
+        render.start();
+        SDL_Delay(50);
         SDL_GL_SwapWindow(window);
-        //render.start
     }
+}
+
+void Window::drawObject(Object &object)
+{
+    render.addObject(&object);
 }
 
 Window::~Window()

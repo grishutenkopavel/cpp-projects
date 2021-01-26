@@ -1,16 +1,16 @@
 #include <SDL2/SDL.h>
 #include "../include/eventloop.hpp"
 
-bool EventLoop::KeyEventHandler(SDL_Event &event)
+bool EventLoop::handleKeyEvent(SDL_Event &event)
 {
     switch (event.key.keysym.sym)
     {
-    case SDLK_ESCAPE:
-        return false;
-        break;
-    
-    default:
-        break;
+        case SDLK_ESCAPE:
+            return false;
+            break;
+        
+        default:
+            break;
     }
     return true;
 }
@@ -21,7 +21,7 @@ void EventLoop::start(bool &runState)
     {
         if(ev.type == SDL_QUIT)
             runState = false;
-
-        runState = KeyEventHandler(ev);
+        if(ev.type == SDL_KEYDOWN)
+            runState = handleKeyEvent(ev);
     }
 }

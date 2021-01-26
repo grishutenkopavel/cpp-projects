@@ -3,6 +3,8 @@
 
 #include <SDL2/SDL.h>
 #include "eventloop.hpp"
+#include "renderer.hpp"
+#include "object.hpp"
 
 class Window
 {
@@ -11,12 +13,13 @@ private:
     int height_;
     SDL_GLContext context;
     EventLoop el;
+    Renderer render;
 public:
     bool status;
     Window(int width, int height);
     void show();
+    void drawObject(Object &object);
     ~Window();
-
 };
 
 #endif
