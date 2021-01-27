@@ -4,10 +4,13 @@
 void Renderer::start()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    glPushMatrix();
+    camera.move();
     for(objectsIter = objects.begin(); objectsIter != objects.end(); objectsIter++)
     {
         (*objectsIter)->draw();
     }
+    glPopMatrix();
 }
 
 void Renderer::addObject(Object *whatToRender)
