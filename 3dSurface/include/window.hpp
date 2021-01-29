@@ -5,7 +5,7 @@
 #include "eventloop.hpp"
 #include "renderer.hpp"
 #include "object.hpp"
-
+#include "camera.hpp"
 class Window
 {
 private:
@@ -14,6 +14,7 @@ private:
     SDL_GLContext context;
     EventLoop el;
     Renderer render;
+    Camera camera;
 public:
     bool status;
     Window(int width, int height);

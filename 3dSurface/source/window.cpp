@@ -3,6 +3,7 @@
 #include <GL/gl.h>
 
 #include "../include/quad.hpp"
+#include "../include/scene.hpp"
 
 SDL_Window *window = nullptr;
 
@@ -38,13 +39,15 @@ void Window::show()
 {
 
     bool running = true;
+    Scene *mainScene = new Scene(camera, render);
     while(running)
     {
         el.start(running);
-        render.start();
+        mainScene->enableScene();
         SDL_Delay(50);
         SDL_GL_SwapWindow(window);
     }
+    delete mainScene;
 }
 
 void Window::drawObject(Object &object)
