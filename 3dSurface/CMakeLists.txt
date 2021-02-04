@@ -9,6 +9,7 @@ add_executable(surface
     source/renderer.cpp
     source/quad.cpp
     source/camera.cpp
-    source/scene.cpp)
+    source/scene.cpp
+    source/cube.cpp)
 
 target_link_libraries(surface mingw32 SDL2main SDL2 opengl32)
