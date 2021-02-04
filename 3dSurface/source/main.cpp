@@ -5,9 +5,16 @@ int main(int argc, char *argv[])
 {
     Window *window = new Window(500, 500);
 
-    Quad floor(1, 1, 2, 2);
-
-    window->drawObject(floor);
+    //Quad floor(0, 0, 2, 2);
+    Quad *floor[10][10];
+    for(int i = 0; i < 10; i++)
+        for(int j = 0;  j < 10; j++)
+        {
+            floor[i][j] = new Quad(i, j,-1,-1);
+            if(i*j % 2 == 0)
+                floor[i][j]->setColor(1,1,1);
+            window->drawObject(*floor[i][j]);
+        }
 
     window->show();
     delete window;

@@ -7,7 +7,7 @@ bool EventLoop::handleKeyEvent(SDL_Event &event)
         case SDLK_ESCAPE:
             return false;
             break;
-        
+        //camera rotation
         case SDLK_UP:
             scene->getCamera()->rotateCameraVertical(5);
             break;
@@ -20,6 +20,20 @@ bool EventLoop::handleKeyEvent(SDL_Event &event)
             break;
         case SDLK_LEFT:
             scene->getCamera()->rotateCameraHorizontal(10);
+            break;
+        //camera movement
+        case SDLK_w:
+            scene->getCamera()->moveForward(0.1);
+            break;
+        case SDLK_s:
+            scene->getCamera()->moveForward(-0.1);
+            break;
+
+        case SDLK_a:
+            scene->getCamera()->moveSide(-0.1);
+            break;
+        case SDLK_d:
+            scene->getCamera()->moveSide(0.1);
             break;
 
         default:

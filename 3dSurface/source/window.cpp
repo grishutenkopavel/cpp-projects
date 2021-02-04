@@ -30,7 +30,7 @@ Window::Window(int width, int height)
 
     context = SDL_GL_CreateContext(window);
     glClearColor(0, 0, 0, 0);
-    glFrustum(-1,1, -1,1, 2, 8);
+    glFrustum(-1,1, -1,1, 2, 100);
     // glEnable(GL_DEPTH_TEST);
     status = success;
 }
