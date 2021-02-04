@@ -10,7 +10,11 @@ void Scene::enableScene()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
-    sceneCamera.move();
+    sceneCamera.demonstrate();
     sceneRenderer.start();
     glPopMatrix();
+}
+Camera *Scene::getCamera()
+{
+    return &sceneCamera;
 }

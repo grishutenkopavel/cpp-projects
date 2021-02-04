@@ -12,6 +12,7 @@ private:
 public:
     Scene(Camera &camera, Renderer &render);
     void enableScene();
+    Camera *getCamera();
 };
 
 #endif

@@ -40,6 +40,7 @@ void Window::show()
 
     bool running = true;
     Scene *mainScene = new Scene(camera, render);
+    el.setScene(mainScene);
     while(running)
     {
         el.start(running);

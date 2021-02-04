@@ -1,4 +1,3 @@
-#include <SDL2/SDL.h>
 #include "../include/eventloop.hpp"
 
 bool EventLoop::handleKeyEvent(SDL_Event &event)
@@ -9,6 +8,20 @@ bool EventLoop::handleKeyEvent(SDL_Event &event)
             return false;
             break;
         
+        case SDLK_UP:
+            scene->getCamera()->rotateCameraVertical(5);
+            break;
+        case SDLK_DOWN:
+            scene->getCamera()->rotateCameraVertical(-5);
+            break;
+
+        case SDLK_RIGHT:
+            scene->getCamera()->rotateCameraHorizontal(-10);
+            break;
+        case SDLK_LEFT:
+            scene->getCamera()->rotateCameraHorizontal(10);
+            break;
+
         default:
             break;
     }
@@ -24,4 +37,9 @@ void EventLoop::start(bool &runState)
         if(ev.type == SDL_KEYDOWN)
             runState = handleKeyEvent(ev);
     }
+}
+
+void EventLoop::setScene(Scene *scene)
+{
+    this->scene = scene;
 }

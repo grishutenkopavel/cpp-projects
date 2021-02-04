@@ -4,9 +4,13 @@
 class Camera
 {
 private:
-    /* data */
+    int angleX;
+    int angleZ;
 public:
-    void move();
+    Camera();
+    void demonstrate();
+    void rotateCameraVertical(int degree);
+    void rotateCameraHorizontal(int degree);
 };
 
 
