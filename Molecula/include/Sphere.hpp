@@ -1,13 +1,11 @@
 #pragma once
 #include "classes.hpp"
-
-class Quad : public Object
+class Sphere : public Object
 {
 private:
-    float x, y, z;
-    float w, h;
+    GLUquadricObj *quadObj;
 public:
-    Quad(float x, float y, float z, float w, float h);
+    Sphere();
     void render() override;
     bool haveEventHandler() override;
     void handleEvent(SDL_Event event) override;
