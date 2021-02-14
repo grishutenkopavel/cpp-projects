@@ -6,7 +6,7 @@
 class CoreHandlerSDL : public ICoreHandler
 {
 private:
-    /* data */
+
 public:
     void initLib() override;
     int eventLoop(std::list<Object*> *objectList) override;

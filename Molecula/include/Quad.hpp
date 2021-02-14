@@ -4,7 +4,9 @@
 class Quad : public Object
 {
 private:
-    /* data */
+    
 public:
     void render() override;
+    bool haveEventHandler() override;
+    void handleEvent(SDL_Event event) override;
 };

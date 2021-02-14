@@ -9,3 +9,12 @@ void Quad::render()
         glVertex2f(-0.5, -0.5);
     glEnd();
 }
+bool Quad::haveEventHandler()
+{
+    return false;
+}
+
+void Quad::handleEvent(SDL_Event event)
+{
+
+}

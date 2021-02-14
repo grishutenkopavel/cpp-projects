@@ -19,12 +19,20 @@ int CoreHandlerSDL::eventLoop(std::list<Object*> *objectList)
 {
     bool running = true;
     SDL_Event ev;
+    std::list<Object*>::iterator iter;
     while(running)
     {
         while(SDL_PollEvent(&ev)!=0)
         {
 
-            //take object with EventsHanler and handleEvent()
+            if (objectList->front()->haveEventHandler())
+            {
+                for(iter = objectList->begin(); iter != objectList->end(); iter++)
+                {
+                    (*iter)->handleEvent(ev);
+                }                
+            }
+
             if(ev.type == SDL_QUIT)
             {
                 running = false;
@@ -44,7 +52,12 @@ int CoreHandlerSDL::eventLoop(std::list<Object*> *objectList)
 
         }
 
-        objectList->front()->render();//render all objects
+        glClear(GL_COLOR_BUFFER_BIT);
+        //render all objects
+        for(iter = objectList->begin(); iter != objectList->end(); iter++)
+        {
+            (*iter)->render();
+        }
         SDL_GL_SwapWindow(window);
     }
     return 0;
