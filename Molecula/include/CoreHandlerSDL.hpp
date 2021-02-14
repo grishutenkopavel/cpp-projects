@@ -9,6 +9,6 @@ private:
     /* data */
 public:
     void initLib() override;
-    int eventLoop() override;
+    int eventLoop(std::list<Object*> *objectList) override;
 };
 

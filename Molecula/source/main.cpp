@@ -4,8 +4,8 @@ int main(int argc, char *argw[])
 {
     Program *molecula = new Program();  
     molecula->setProgramCoreHandler(new CoreHandlerSDL);
-    
-    //-> addObjects()
+    Quad q;
+    molecula->addObject(&q);
 
     return molecula->exec();
 }
