@@ -1,1 +1,0 @@
-![cube](https://raw.githubusercontent.com/grishutenkopavel/cpp-projects/master/cube/Cube.PNG)
