@@ -35,8 +35,12 @@ int main(int argc, char *argw[])
     Program *molecula = new Program();  
     molecula->setProgramCoreHandler(new CoreHandlerSDL);
     //RotatingQuad q(0,0,0,1,1);
-    Sphere s;
-    molecula->addObject(&s);
+    Sphere s1(0.6, 0, 5);
+    s1.setSphereColor(1, 0, 0);
+    Sphere s2(-0.6, 0, 5);
+    s2.setSphereColor(0, 1, 0);
+    molecula->addObject(&s1);
+    molecula->addObject(&s2);
 
     return molecula->exec();
 }

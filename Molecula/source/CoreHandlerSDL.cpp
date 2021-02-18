@@ -14,6 +14,9 @@ void CoreHandlerSDL::initLib()
     
     context = SDL_GL_CreateContext(window);
     glClearColor(0, 0, 0, 0);
+    glEnable(GL_DEPTH_TEST);
+    glFrustum(-1, 1, -1, 1, -3, 50);
+
 }
 int CoreHandlerSDL::eventLoop(std::list<Object*> *objectList)
 {
@@ -52,7 +55,9 @@ int CoreHandlerSDL::eventLoop(std::list<Object*> *objectList)
 
         }
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        SDL_Delay(16);
+        glRotatef(4, 0, 1, 0);
         //render all objects
         for(iter = objectList->begin(); iter != objectList->end(); iter++)
         {
