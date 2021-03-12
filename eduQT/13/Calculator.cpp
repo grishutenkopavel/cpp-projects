@@ -79,7 +79,7 @@ void Calculator::slotButtonClicked()
             calculate();
             m_stk.clear();
             m_stk.push(QString().setNum(m_plcd->value()));
-            if(str == '=')
+            if(str != '=')
             {
                 m_stk.push(str);
             }
