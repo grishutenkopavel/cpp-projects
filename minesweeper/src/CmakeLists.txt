@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.17)
+
+project(minesweeper)
+
+add_executable(minesweeper
+            main.cpp
+            Game.cpp
+            headers/Game.hpp)
+
+target_link_libraries(minesweeper mingw32 SDL2main SDL2)
