@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <stdio.h>
+
 typedef struct{
     int mapW;
     int mapH;
@@ -29,6 +31,7 @@ private:
 private:
     void showMine();
     void showField();
+    void showFieldOpen();
     void showCount( int a );
     bool isCellInMap( int x, int y );
 public:

@@ -53,19 +53,19 @@ void Game::eventLoop(){
 
 void Game::reactToWindowEvent( SDL_Event* event, bool* programStatus ){
     if( event->type == SDL_QUIT ){
-                *programStatus = false;
-            }
-            if( event->type == SDL_KEYDOWN ){
-                switch ( event->key.keysym.sym )
-                {
-                case SDLK_q:
-                    *programStatus = false;
-                    break;
-                
-                default:
-                    break;
-                }
-            }
+        *programStatus = false;
+    }
+    if( event->type == SDL_KEYDOWN ){
+        switch ( event->key.keysym.sym )
+        {
+        case SDLK_q:
+            *programStatus = false;
+            break;
+        
+        default:
+            break;
+        }
+    }
 }
 void Game::newGame(){
     gameField->genNewField();

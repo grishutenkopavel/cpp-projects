@@ -16,7 +16,11 @@ PlayGround::~PlayGround()
 }
 
 void PlayGround::reactToAnEvent( SDL_Event* event ){
-    
+    if ( event->type == SDL_MOUSEBUTTONDOWN )
+    {
+        if (event->button.button == SDL_BUTTON_LEFT)
+            printf("x = %d, y = %d", event->motion.x, event->motion.y);
+    }
 }
 
 void PlayGround::showMine(){
@@ -26,6 +30,13 @@ void PlayGround::showMine(){
         glVertex2f( 0.7f, 0.3f );
         glVertex2f( 0.7f, 0.7f );
         glVertex2f( 0.3f, 0.7f );
+    glEnd();
+}
+void PlayGround::showFieldOpen(){
+    glBegin( GL_TRIANGLE_STRIP );
+        glColor3f( 0.3f, 0.7f, 0.3f ); glVertex2f( 0.f, 1.f );
+        glColor3f( 0.3f, 0.6f, 0.3f ); glVertex2f( 1.f, 1.f ); glVertex2f( 0.f, 0.f );
+        glColor3f( 0.3f, 0.5f, 0.3f ); glVertex2f( 1.f, 0.f );
     glEnd();
 }
 void PlayGround::showField(){
@@ -67,10 +78,15 @@ void PlayGround::render(){
         for ( int i = 0; i < mapSize.mapW; i++ ){
             glPushMatrix();
             glTranslatef( i, j, 0 );
-            showField();
-            if ( map[i][j].mine )
-                showMine();
-            showCount(i);
+            if ( map[i][j].open ){
+                    showFieldOpen();
+                if ( map[i][j].mine )
+                    showMine();
+                else if ( map[i][j].cntAround > 0 )
+                    showCount( map[i][j].cntAround );
+            } else 
+                showField();
+            
             glPopMatrix();
         }
     
@@ -85,7 +101,7 @@ void PlayGround::genNewField()
 {
     srand(time(NULL));
     for ( int i = 0; i < mapSize.mapH; i++ )
-        memset(map[i], 0, sizeof(map[i]));
+        memset(map[i], 0, sizeof(TCell) * mapSize.mapW);
     
     mines = 20;
     closedCell = mapSize.mapH * mapSize.mapW;
