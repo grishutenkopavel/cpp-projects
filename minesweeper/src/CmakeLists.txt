@@ -5,6 +5,8 @@ project(minesweeper)
 add_executable(minesweeper
             main.cpp
             Game.cpp
-            headers/Game.hpp)
+            PlayGround.cpp
+            headers/Game.hpp
+            headers/PlayGround.hpp)
 
-target_link_libraries(minesweeper mingw32 SDL2main SDL2)
+target_link_libraries(minesweeper mingw32 SDL2main SDL2 opengl32)
