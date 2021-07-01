@@ -4,7 +4,7 @@ Game::Game( int cellsVertically, int cellsHorizontally )
 : size({ 500, 500 })
 {
     errorStatus = init();
-    gameField = new PlayGround( cellsVertically, cellsHorizontally );
+    gameField = new PlayGround( size, cellsVertically, cellsHorizontally );
 }
 
 Game::~Game()

@@ -1,8 +1,9 @@
 #include "headers/PlayGround.hpp"
 
 
-PlayGround::PlayGround( int mapH, int mapW )
-: mapSize({mapW, mapH})
+PlayGround::PlayGround( WindowSize winSize, int mapH, int mapW )
+: mapSize({mapW, mapH}),
+  windowSize(winSize)
 {
     map = new TCell*[mapSize.mapH];
     for( int i = 0; i < mapSize.mapH; i++ ){
@@ -15,11 +16,20 @@ PlayGround::~PlayGround()
     //add delete map
 }
 
+#pragma mark - event handler
+
 void PlayGround::reactToAnEvent( SDL_Event* event ){
+    float ox, oy;
     if ( event->type == SDL_MOUSEBUTTONDOWN )
     {
         if (event->button.button == SDL_BUTTON_LEFT)
-            printf("x = %d, y = %d", event->motion.x, event->motion.y);
+
+            screenToOpenGL( event, &ox, &oy );
+            int x = int(ox);
+            int y = int(oy);
+            if ( isCellInMap( x, y ) )
+                map[x][y].open = true;
+
     }
 }
 
@@ -96,7 +106,10 @@ bool PlayGround::isCellInMap( int x, int y ){
     return (x >= 0) && (y >= 0) && (x < mapSize.mapW) && (y < mapSize.mapH); 
 }
 
-
+void PlayGround::screenToOpenGL( SDL_Event* event, float* ox, float* oy ){
+    *ox = event->button.x / float(windowSize.width) * mapSize.mapW;
+    *oy = mapSize.mapH - event->button.y / float(windowSize.height) * mapSize.mapH;
+}
 void PlayGround::genNewField()
 {
     srand(time(NULL));

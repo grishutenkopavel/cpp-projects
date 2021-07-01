@@ -4,11 +4,7 @@
 #include <GL/gl.h>
 
 #include "PlayGround.hpp"
-typedef struct{
-    int width;
-    int height;
-}  WindowSize;
-
+#include "structures.h"
 
 class Game
 {

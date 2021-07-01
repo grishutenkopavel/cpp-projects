@@ -6,23 +6,12 @@
 #include <cstdlib>
 #include <ctime>
 
-#include <stdio.h>
-
-typedef struct{
-    int mapW;
-    int mapH;
-}  MapSize;
-
-typedef struct {
-    bool mine;
-    bool flag;
-    bool open;
-    int cntAround;
-} TCell;
+#include "structures.h"
 
 class PlayGround
 {
 private:
+    WindowSize windowSize;
     TCell** map;
     MapSize mapSize;
     int mines;
@@ -33,9 +22,10 @@ private:
     void showField();
     void showFieldOpen();
     void showCount( int a );
+    void screenToOpenGL( SDL_Event* event, float* ox, float* oy );
     bool isCellInMap( int x, int y );
 public:
-    PlayGround( int mapH, int mapW );
+    PlayGround( WindowSize winSize, int mapH, int mapW );
     void render();
     void reactToAnEvent( SDL_Event* event );
     void genNewField();
