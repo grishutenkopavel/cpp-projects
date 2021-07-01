@@ -21,6 +21,7 @@ private:
     void showMine();
     void showField();
     void showFieldOpen();
+    void showFlag();
     void showCount( int a );
     void screenToOpenGL( SDL_Event* event, float* ox, float* oy );
     bool isCellInMap( int x, int y );

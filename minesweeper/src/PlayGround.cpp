@@ -13,7 +13,9 @@ PlayGround::PlayGround( WindowSize winSize, int mapH, int mapW )
 
 PlayGround::~PlayGround()
 {
-    //add delete map
+    for( int i = 0; i < mapSize.mapH; i++ )
+        delete[] map[i];
+    delete[] map;
 }
 
 #pragma mark - event handler
@@ -22,15 +24,39 @@ void PlayGround::reactToAnEvent( SDL_Event* event ){
     float ox, oy;
     if ( event->type == SDL_MOUSEBUTTONDOWN )
     {
-        if (event->button.button == SDL_BUTTON_LEFT)
+        if (event->button.button == SDL_BUTTON_LEFT){
 
             screenToOpenGL( event, &ox, &oy );
             int x = int(ox);
             int y = int(oy);
             if ( isCellInMap( x, y ) )
                 map[x][y].open = true;
+        }
+        if (event->button.button == SDL_BUTTON_RIGHT){
+            screenToOpenGL( event, &ox, &oy );
+            int x = int(ox);
+            int y = int(oy);
+            if ( isCellInMap( x, y ) )
+                map[x][y].flag = !map[x][y].flag;
+        }
 
     }
+}
+
+void PlayGround::showFlag()
+{
+    glBegin( GL_TRIANGLES );
+        glColor3f( 1.f, 0.f, 0.f );
+        glVertex2f( 0.25f, 0.75f );
+        glVertex2f( 0.85f, 0.5f );
+        glVertex2f( 0.25f, 0.25f );
+    glEnd();
+    glLineWidth( 5 );
+    glBegin( GL_LINES );
+        glColor3f( 0.f, 0.f, 0.f );
+        glVertex2f( 0.25f, 0.75f );
+        glVertex2f( 0.25f, 0.f );
+    glEnd();
 }
 
 void PlayGround::showMine(){
@@ -94,9 +120,11 @@ void PlayGround::render(){
                     showMine();
                 else if ( map[i][j].cntAround > 0 )
                     showCount( map[i][j].cntAround );
-            } else 
+            } else {
                 showField();
-            
+                if( map[i][j].flag)
+                    showFlag();
+            }
             glPopMatrix();
         }
     
