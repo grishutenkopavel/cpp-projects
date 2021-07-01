@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
+#include <functional>
 #include <cstdlib>
 #include <ctime>
 
@@ -28,6 +29,8 @@ private:
 private:
     void showMine();
     void showField();
+    void showCount( int a );
+    bool isCellInMap( int x, int y );
 public:
     PlayGround( int mapH, int mapW );
     void render();

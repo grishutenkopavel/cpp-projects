@@ -35,6 +35,29 @@ void PlayGround::showField(){
         glColor3f( 0.6f, 0.6f, 0.6f ); glVertex2f( 1.f, 0.f );
     glEnd();
 }
+
+void PlayGround::showCount( int a ){
+    
+    std::function<void(float, float, float, float)> line;
+    line = [](float x1, float y1, float x2, float y2) -> void
+        {
+            glVertex2f( x1, y1 );
+            glVertex2f( x2, y2 );
+        };
+    glLineWidth( 3 );
+    glColor3f( 1.f, 1.f, 0.f );
+    glBegin(GL_LINES);
+        if ( ( a != 1 ) && ( a != 4 ) ) line( 0.3f, 0.85f, 0.7f, 0.85f );
+        if ( ( a != 0 ) && ( a != 1 ) && ( a != 7 ) ) line( 0.3f, 0.5f, 0.7f, 0.5f ); 
+        if ( ( a != 1 ) && ( a != 4 ) && ( a != 7 ) ) line( 0.3f, 0.15f, 0.7f, 0.15f );
+        
+        if ( ( a != 5 ) && ( a != 6 ) ) line( 0.7f, 0.5f, 0.7f, 0.85f ); 
+        if ( ( a != 2 ) ) line( 0.7f, 0.5f, 0.7f, 0.15f ); 
+        if ( ( a != 1 ) && ( a != 2 ) && ( a != 3 ) && ( a != 7 ) ) line( 0.3f, 0.5f, 0.3f, 0.85f ); 
+        if ( ( a == 0 ) || ( a == 2 ) || ( a == 6 ) || ( a == 8 ) ) line( 0.3f, 0.5f, 0.3f, 0.15f ); 
+    glEnd();
+}
+
 void PlayGround::render(){
     glLoadIdentity();
     glScalef( 2.f/mapSize.mapW, 2.f/mapSize.mapH,  1.f );
@@ -47,10 +70,16 @@ void PlayGround::render(){
             showField();
             if ( map[i][j].mine )
                 showMine();
+            showCount(i);
             glPopMatrix();
         }
     
 }
+
+bool PlayGround::isCellInMap( int x, int y ){
+    return (x >= 0) && (y >= 0) && (x < mapSize.mapW) && (y < mapSize.mapH); 
+}
+
 
 void PlayGround::genNewField()
 {
@@ -66,7 +95,13 @@ void PlayGround::genNewField()
         int y = rand() % mapSize.mapH;
         if ( map[x][y].mine )
             i--;
-        else 
+        else {
             map[x][y].mine = true;
+
+            for ( int dx = -1; dx < 2; dx++ )
+                for ( int dy = -1; dy < 2; dy++ )
+                    if ( isCellInMap( x+dx, y+dy ) )
+                        map[x+dx][y+dy].cntAround += 1;
+        }
     } 
 }
