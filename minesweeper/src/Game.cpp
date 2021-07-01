@@ -1,7 +1,7 @@
 #include "headers/Game.hpp"
 
 Game::Game( int cellsVertically, int cellsHorizontally )
-: size({ 640, 480 })
+: size({ 500, 500 })
 {
     errorStatus = init();
     gameField = new PlayGround( cellsVertically, cellsHorizontally );

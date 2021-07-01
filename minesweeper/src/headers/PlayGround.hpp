@@ -24,6 +24,10 @@ private:
     MapSize mapSize;
     int mines;
     int closedCell;
+
+private:
+    void showMine();
+    void showField();
 public:
     PlayGround( int mapH, int mapW );
     void render();
