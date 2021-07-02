@@ -17,7 +17,7 @@ int Game::init (){
     SDL_GLContext context;
     SDL_Init( SDL_INIT_EVERYTHING );
 
-    window = SDL_CreateWindow( "window", SDL_WINDOWPOS_CENTERED, 
+    window = SDL_CreateWindow( "Minesweeper", SDL_WINDOWPOS_CENTERED, 
                             SDL_WINDOWPOS_CENTERED,
                             size.width,
                             size.height,

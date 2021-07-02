@@ -3,7 +3,8 @@
 
 PlayGround::PlayGround( WindowSize winSize, int mapH, int mapW )
 : mapSize({mapW, mapH}),
-  windowSize(winSize)
+  windowSize(winSize),
+  winCount(0)
 {
     map = new TCell*[mapSize.mapH];
     for( int i = 0; i < mapSize.mapH; i++ ){
@@ -25,12 +26,13 @@ void PlayGround::reactToAnEvent( SDL_Event* event ){
     if ( event->type == SDL_MOUSEBUTTONDOWN )
     {
         if (event->button.button == SDL_BUTTON_LEFT){
-
+            if( failed )
+                genNewField();
             screenToOpenGL( event, &ox, &oy );
             int x = int(ox);
             int y = int(oy);
-            if ( isCellInMap( x, y ) )
-                map[x][y].open = true;
+            if ( isCellInMap( x, y ) && !map[x][y].flag)
+                openField( x, y );
         }
         if (event->button.button == SDL_BUTTON_RIGHT){
             screenToOpenGL( event, &ox, &oy );
@@ -127,7 +129,27 @@ void PlayGround::render(){
             }
             glPopMatrix();
         }
-    
+    if ( mines == closedCell ) {
+        genNewField();
+        winCount++;
+        printf("You won %d times\n", winCount);
+    }
+}
+
+void PlayGround::openField( int x, int y ){
+    if (!isCellInMap( x, y ) || map[x][y].open ) return;
+    map[x][y].open = true;
+    closedCell--;
+    if ( map[x][y].cntAround == 0 )
+        for ( int dx = -1; dx < 2; dx++)
+            for ( int dy = -1; dy < 2; dy++)
+                openField( x + dx, y + dy );
+    if ( map[x][y].mine ){
+        failed = true;
+        for ( int i = 0; i < mapSize.mapH; i++)
+            for ( int j = 0; j < mapSize.mapW; j++)
+                map[i][j].open = true;
+    }
 }
 
 bool PlayGround::isCellInMap( int x, int y ){
@@ -146,7 +168,7 @@ void PlayGround::genNewField()
     
     mines = 20;
     closedCell = mapSize.mapH * mapSize.mapW;
-
+    failed = false;
     for ( int i = 0; i < mines; i++ ){
         int x = rand() % mapSize.mapW;
         int y = rand() % mapSize.mapH;
